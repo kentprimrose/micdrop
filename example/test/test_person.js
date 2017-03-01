@@ -44,6 +44,7 @@ describe('HTTP service', () => {
     chai.request(server)
       .post(URI)
       .end( (err, res) => {
+        assert.isNotNull(err);
         assert.equal(res.statusCode, 400);
 
         assert.notProperty(res.headers, 'location');
@@ -56,12 +57,14 @@ describe('HTTP service', () => {
       .post(URI)
       .send(BASE)
       .end( (err, res) => {
+        assert.isNull(err);
         assert.equal(res.statusCode, 200);
 
         let id = res.headers.location;
         chai.request(server)
           .get(URI + id)
           .end( (err, res) => {
+            assert.isNull(err);
             assert.deepEqual(res.body, BASE);
 
             deleteEntry(id);
@@ -75,12 +78,14 @@ describe('HTTP service', () => {
       .post(URI)
       .send(BASE)
       .end( (err, res) => {
+        assert.isNull(err);
         assert.equal(res.statusCode, 200);
 
         let id = res.headers.location;
         chai.request(server)
           .get(URI + id)
           .end( (err, res) => {
+            assert.isNull(err);
             assert.deepEqual(res.body, BASE);
 
             deleteEntry(id);
@@ -88,4 +93,5 @@ describe('HTTP service', () => {
           });
       });
   });
+
 });

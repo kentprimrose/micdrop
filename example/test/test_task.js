@@ -45,6 +45,7 @@ describe('HTTP service', () => {
     chai.request(server)
       .post(URI)
       .end( (err, res) => {
+        assert.isNotNull(err);
         assert.equal(res.statusCode, 400);
 
         assert.notProperty(res.headers, 'location');
@@ -57,12 +58,14 @@ describe('HTTP service', () => {
       .post(URI)
       .send(BASE)
       .end( (err, res) => {
+        assert.isNull(err);
         assert.equal(res.statusCode, 200);
 
         let id = res.headers.location;
         chai.request(server)
           .get(URI + id)
           .end( (err, res) => {
+            assert.isNull(err);
             assert.deepEqual(res.body, BASE);
 
             deleteEntry(id);
@@ -76,13 +79,39 @@ describe('HTTP service', () => {
       .post(URI)
       .send(BASE)
       .end( (err, res) => {
+        assert.isNull(err);
         assert.equal(res.statusCode, 200);
 
         let id = res.headers.location;
         chai.request(server)
           .get(URI + id)
           .end( (err, res) => {
+            assert.isNull(err);
             assert.deepEqual(res.body, BASE);
+
+            deleteEntry(id);
+            done();
+          });
+      });
+  });
+
+  it('should not allow modification of an existing item', (done) => {
+    chai.request(server)
+      .post(URI)
+      .send(BASE)
+      .end( (err, res) => {
+        assert.isNull(err);
+        assert.equal(res.statusCode, 200);
+
+        let id = res.headers.location;
+        let modified = BASE;
+        BASE.Description = 'Changed';
+        
+        chai.request(server)
+          .put(URI + id)
+          .send(modified)
+          .end( (err, res) => {
+            assert.deepEqual(res.body, modified);
 
             deleteEntry(id);
             done();

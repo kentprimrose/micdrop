@@ -49,11 +49,12 @@ module.exports = (app, route) => {
     }
 
     let id = req.params.id;
-    if (!route.handler.post) return res.sendStatus(405);
-    let result = route.handler.post(id, req.body);
+    if (!route.handler.put) return res.sendStatus(405);
+    let result = route.handler.put(id, req.body);
 
     if (!result) return res.sendStatus(404);
 
+    debugger;
     return res
       .status(200)
       .send(result);
@@ -67,7 +68,7 @@ module.exports = (app, route) => {
     }
 
     let id = req.params.id;
-    if (!route.handler.post) return res.sendStatus(405);
+    if (!route.handler.patch) return res.sendStatus(405);
     let result = route.handler.patch(id, req.body);
 
     if (!result) return res.sendStatus(404);
@@ -79,7 +80,7 @@ module.exports = (app, route) => {
 
   app.delete(getBase(route) + '/:id', (req, res) => {
     let id = req.params.id;
-    if (!route.handler.post) return res.sendStatus(405);
+    if (!route.handler.delete) return res.sendStatus(405);
 
     let result = route.handler.delete(id);
     let status = result ? 204 : 404;
