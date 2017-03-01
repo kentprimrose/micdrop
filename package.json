@@ -1,0 +1,30 @@
+{
+  "name": "micdrop",
+  "version": "0.1.0",
+  "description": "MicroService baseline using Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"See tests in \\example application.\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kentprimrose/micdrop.git"
+  },
+  "keywords": [
+    "MicroService",
+    "Express",
+    "configurable",
+    "container"
+  ],
+  "author": "Kent Primrose",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kentprimrose/micdrop/issues"
+  },
+  "homepage": "https://github.com/kentprimrose/micdrop#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "morgan": "^1.8.1"
+  }
+}

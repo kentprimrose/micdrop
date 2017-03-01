@@ -1,0 +1,21 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "Example of using micdrop.",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha --reporter min --recursive --watch",
+    "test:debug": "npm test -- debug"
+  },
+  "author": "Kent Primrose",
+  "license": "MIT",
+  "dependencies": {
+    "micdrop": "^0.1.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "memrest": "^0.1.0",
+    "mocha": "^3.2.0"
+  }
+}
