@@ -1,6 +1,6 @@
 {
   "name": "micdrop",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "MicroService baseline using Express",
   "main": "index.js",
   "scripts": {
