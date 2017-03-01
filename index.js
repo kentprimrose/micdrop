@@ -31,9 +31,13 @@ module.exports = {
       }
     }
 
-    app.listen(config.PORT, () => {
-      console.log('Listening on port %s', config.PORT);
-    });
+    // Facilitates external control and 'watch' listening.
+    if (!module.parent.parent) {
+      app.listen(config.PORT, () => {
+        console.log('Listening on port %s', config.PORT);
+      });
+    }
 
+    return app;
   }
 };

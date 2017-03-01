@@ -7,11 +7,12 @@ const assert = chai.assert;
 
 chai.use(chaiHttp);
 
-const URI = '/person/';
+const URI = '/task/';
 const BASE = {
-  FirstName: 'First',
-  LastName: 'Last',
-  BirthDate: '01/01/1970'
+  PersonId: '1234',
+  Description: 'This is a cool task',
+  DueDate: '01/01/2018',
+  DoneDate: null
 };
 
 let deleteEntry = (id) => {

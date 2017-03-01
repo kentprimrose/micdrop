@@ -1,10 +1,10 @@
 const micdrop = require('..');
 
-micdrop.init({
+module.exports = micdrop.init({
   PORT: 3500,
   routes: [{
     name: 'person',
-    handler: require('./person_handler'),
+    handler: require('./handlers/person_handler'),
     subs: {
       task: null,
       org: {
@@ -13,6 +13,6 @@ micdrop.init({
     }
   },{
     name: 'task',
-    handler: require('./task_handler')
+    handler: require('./handlers/task_handler')
   }]
 });
