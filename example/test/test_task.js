@@ -19,9 +19,9 @@ let deleteEntry = (id) => {
   chai.request(server)
     .delete(URI + id)
     .end( (err, res) => {
-      assert.isNull(err);
+      assert.equal(res.statusCode, 405);
     });
-}
+};
 
 describe('HTTP service', () => {
   let ids;
@@ -111,10 +111,17 @@ describe('HTTP service', () => {
           .put(URI + id)
           .send(modified)
           .end( (err, res) => {
-            assert.deepEqual(res.body, modified);
+            assert.equal(res.statusCode, 405);
 
-            deleteEntry(id);
-            done();
+            chai.request(server)
+              .patch(URI + id)
+              .send({ Description: 'Changed again'})
+              .end( (err, res) => {
+                assert.equal(res.statusCode, 405);
+                
+                deleteEntry(id);
+                done();
+              });
           });
       });
   });
