@@ -1,5 +1,3 @@
-process.env.LOGFMT = 'none';
-
 const mocha = require('mocha');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
