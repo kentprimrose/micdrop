@@ -34,10 +34,9 @@ describe('HTTP service', () => {
       .end( (err, res) => {
         assert.isNull(err);
         assert.equal(res.statusCode, 200);
-        assert.property(res.headers, 'location');
-        assert.deepEqual(res.body, BASE);
+        assert.property(res.body, 'id');
 
-        deleteEntry(res.headers.location);
+        deleteEntry(res.body.id);
         done();
       });
   });
@@ -49,7 +48,6 @@ describe('HTTP service', () => {
         assert.isNotNull(err);
         assert.equal(res.statusCode, 400);
 
-        assert.notProperty(res.headers, 'location');
         done();
       });
   });
@@ -62,7 +60,7 @@ describe('HTTP service', () => {
         assert.isNull(err);
         assert.equal(res.statusCode, 200);
 
-        let id = res.headers.location;
+        let id = res.body.id;
         chai.request(server)
           .get(URI + id)
           .end( (err, res) => {
@@ -83,7 +81,7 @@ describe('HTTP service', () => {
         assert.isNull(err);
         assert.equal(res.statusCode, 200);
 
-        let id = res.headers.location;
+        let id = res.body.id;
         chai.request(server)
           .get(URI + id)
           .end( (err, res) => {

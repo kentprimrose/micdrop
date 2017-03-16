@@ -52,8 +52,8 @@ module.exports = (app, route) => {
 
       return res
         .status(200)
-        .set({'Location': id})
-        .send(req.body);
+        // .set({'Location': id})
+        .send({id: id});
     }
     catch (ex) {
       console.error(ex);
@@ -131,10 +131,25 @@ module.exports = (app, route) => {
     }
   });
 
-  // Any other requests => 400
-  app.all(getBase(route), (req, res) => {
+  // Complain about PUT with no id.
+  app.put(getBase(route), (req, res) => {
     return res
       .status(400)
       .send('Bad request');
   });
+
+  // Complain about PATCH with no id.
+  app.patch(getBase(route), (req, res) => {
+    return res
+      .status(400)
+      .send('Bad request');
+  });
+
+  // Complain about DELETE with no id.
+  app.delete(getBase(route), (req, res) => {
+    return res
+      .status(400)
+      .send('Bad request');
+  });
+
 };
