@@ -4,14 +4,6 @@ let getBase = (route) => {
 
 module.exports = (app, route) => {
 
-  app.get(getBase(route), (req, res) => {
-    if (!route.handler.get) return res.sendStatus(405);
-
-    return res
-      .status(200)
-      .send(route.handler.get());
-  });
-
   app.get(getBase(route) + '/:id', (req, res) => {
     if (!route.handler.getOne) return res.sendStatus(405);
 
@@ -23,6 +15,14 @@ module.exports = (app, route) => {
     return res
       .status(200)
       .send(result);
+  });
+
+  app.get(getBase(route), (req, res) => {
+    if (!route.handler.get) return res.sendStatus(405);
+
+    return res
+      .status(200)
+      .send(route.handler.get());
   });
 
   app.post(getBase(route), (req, res) => {
@@ -87,5 +87,12 @@ module.exports = (app, route) => {
 
     return res
       .sendStatus(status);
+  });
+
+  // Any other requests => 400
+  app.all(getBase(route), (req, res) => {
+    return res
+      .status(400)
+      .send('Bad request');
   });
 };

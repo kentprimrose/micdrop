@@ -96,4 +96,69 @@ describe('HTTP service', () => {
       });
   });
 
+  it('should complain if you try to GET all (not implemented)', (done) => {
+    chai.request(server)
+      .get(URI)
+      .end( (err, res) => {
+        assert.isNotNull(err);
+        assert.equal(err.response.statusCode, 405);
+        done();
+      });
+  });
+
+  it('should complain if you try to PUT without an id', (done) => {
+    chai.request(server)
+      .put(URI)
+      .send(BASE)
+      .end( (err, res) => {
+        assert.isNotNull(err);
+        assert.equal(err.response.statusCode, 400);
+        done();
+      });
+  });
+
+  it('should complain if you try to PUT (not implemented)', (done) => {
+    chai.request(server)
+      .put(URI + '1234')
+      .send(BASE)
+      .end( (err, res) => {
+        assert.isNotNull(err);
+        assert.equal(err.response.statusCode, 405);
+        done();
+      });
+  });
+
+  it('should complain if you try to PATCH without an id', (done) => {
+    chai.request(server)
+      .patch(URI)
+      .send(BASE)
+      .end( (err, res) => {
+        assert.isNotNull(err);
+        assert.equal(err.response.statusCode, 400);
+        done();
+      });
+  });
+
+  it('should complain if you try to PATCH (not implemented)', (done) => {
+    chai.request(server)
+      .patch(URI + '1234')
+      .send(BASE)
+      .end( (err, res) => {
+        assert.isNotNull(err);
+        assert.equal(err.response.statusCode, 405);
+        done();
+      });
+  });
+
+  it('should complain if you try to DELETE without an id', (done) => {
+    chai.request(server)
+      .delete(URI)
+      .send(BASE)
+      .end( (err, res) => {
+        assert.isNotNull(err);
+        assert.equal(err.response.statusCode, 400);
+        done();
+      });
+  });
+
 });
