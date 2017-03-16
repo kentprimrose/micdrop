@@ -1,5 +1,5 @@
 let getBase = (route) => {
-  return '/' + route.name;
+  return '/' + route.path;
 };
 
 module.exports = (app, route) => {

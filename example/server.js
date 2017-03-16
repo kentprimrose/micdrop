@@ -2,17 +2,15 @@ const micdrop = require('..');
 
 module.exports = micdrop.init({
   PORT: 3500,
+  middleware: [
+    require('./middleware/cors_middleware'),
+    require('./middleware/second_middleware')
+  ],
   routes: [{
-    name: 'person',
-    handler: require('./handlers/person_handler'),
-    subs: {
-      task: null,
-      org: {
-        role: null
-      }
-    }
+    path: 'person',
+    handler: require('./handlers/person_handler')
   },{
-    name: 'task',
+    path: 'task',
     handler: require('./handlers/task_handler')
   }]
 });

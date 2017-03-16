@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const morgan = require('morgan');
 
 const router = require('./router');
 
@@ -13,16 +12,16 @@ let setDefault = (obj, key, def) => {
 module.exports = {
   init: (config={}) => {
 
-    // Set constants
+    // Configuration
     setDefault(config, 'PORT', 3000);
-    setDefault(config, 'LOGFMT', 'dev');
 
     const app = express();
     app.use(bodyParser.json());
 
-    if (config.LOGFMT != 'none') {
-      console.log('LOGFMT: "%s"', config.LOGFMT);
-      app.use(morgan(config.LOGFMT));
+    if (config.hasOwnProperty('middleware')) {
+      for (let middleware of config.middleware) {
+        app.use(middleware);
+      }
     }
 
     if (config.hasOwnProperty('routes')) {
@@ -31,7 +30,7 @@ module.exports = {
       }
     }
 
-    // Facilitates external control and 'watch' listening.
+    // Allows external control and 'watch' testing.
     if (!module.parent.parent) {
       app.listen(config.PORT, () => {
         console.log('Listening on port %s', config.PORT);

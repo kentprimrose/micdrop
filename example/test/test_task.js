@@ -1,8 +1,12 @@
 process.env.LOGFMT = 'none';
 
+const mocha = require('mocha');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../server');
+
+const describe = mocha.describe;
+const it = mocha.it;
 const assert = chai.assert;
 
 chai.use(chaiHttp);
