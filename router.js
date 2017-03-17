@@ -51,9 +51,8 @@ module.exports = (app, route) => {
       let id = route.handler.post(req.body);
 
       return res
-        .status(200)
-        // .set({'Location': id})
-        .send({id: id});
+        .set({'Location': id})
+        .sendStatus(200);
     }
     catch (ex) {
       console.error(ex);
