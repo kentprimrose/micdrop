@@ -52,8 +52,8 @@ module.exports = (app, route) => {
 
       return res
         .status(200)
-        // .set({'Location': id})
-        .send({id: id});
+        .set({'Location': id})
+        .send('No Body');
     }
     catch (ex) {
       console.error(ex);
