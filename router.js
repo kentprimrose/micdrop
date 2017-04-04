@@ -1,10 +1,10 @@
 let getBase = (route) => {
-  return '/' + route.path;
+  return '/' + route.path + '/';
 };
 
 module.exports = (app, route) => {
 
-  app.get(getBase(route) + '/:id', (req, res) => {
+  app.get(getBase(route) + ':id', (req, res) => {
     try {
       if (!route.handler.getOne) return res.sendStatus(405);
 
@@ -61,7 +61,7 @@ module.exports = (app, route) => {
     }
   });
 
-  app.put(getBase(route) + '/:id', (req, res) => {
+  app.put(getBase(route) + ':id', (req, res) => {
     try {
       if (!Object.keys(req.body).length) {
         return res
@@ -87,7 +87,7 @@ module.exports = (app, route) => {
     }
   });
 
-  app.patch(getBase(route) + '/:id', (req, res) => {
+  app.patch(getBase(route) + ':id', (req, res) => {
     try {
       if (!Object.keys(req.body).length) {
         return res
@@ -112,7 +112,7 @@ module.exports = (app, route) => {
     }
   });
 
-  app.delete(getBase(route) + '/:id', (req, res) => {
+  app.delete(getBase(route) + ':id', (req, res) => {
     try {
       let id = req.params.id;
       if (!route.handler.delete) return res.sendStatus(405);
