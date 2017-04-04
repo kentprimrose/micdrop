@@ -35,9 +35,11 @@ describe('HTTP service', () => {
       .end( (err, res) => {
         assert.isNull(err);
         assert.equal(res.statusCode, 200);
-        assert.property(res.body, 'id');
 
-        deleteEntry(res.body.id);
+        let id = res.headers.location;
+        assert.isNotNull(id);
+
+        deleteEntry(id);
         done();
       });
   });
@@ -60,8 +62,11 @@ describe('HTTP service', () => {
       .end( (err, res) => {
         assert.isNull(err);
         assert.equal(res.statusCode, 200);
+        assert.property(res.headers, 'location');
 
-        let id = res.body.id;
+        let id = res.headers.location;
+        assert.isNotNull(id);
+        
         chai.request(server)
           .get(URI + id)
           .end( (err, res) => {
@@ -82,7 +87,9 @@ describe('HTTP service', () => {
         assert.isNull(err);
         assert.equal(res.statusCode, 200);
 
-        let id = res.body.id;
+        let id = res.headers.location;
+        assert.isNotNull(id);
+        
         chai.request(server)
           .get(URI + id)
           .end( (err, res) => {
@@ -103,7 +110,9 @@ describe('HTTP service', () => {
         assert.isNull(err);
         assert.equal(res.statusCode, 200);
 
-        let id = res.body.id;
+        let id = res.headers.location;
+        assert.isNotNull(id);
+        
         let modified = BASE;
         BASE.Description = 'Changed';
         

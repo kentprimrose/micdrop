@@ -4,7 +4,7 @@
   "description": "MicroService baseline using Express",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"See tests in \\example application.\" && exit 1"
+    "test": "cd example && npm test"
   },
   "repository": {
     "type": "git",
