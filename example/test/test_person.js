@@ -60,6 +60,7 @@ describe('HTTP service', () => {
       .end( (err, res) => {
         assert.isNull(err);
         assert.equal(res.statusCode, 200);
+        assert.property(res.headers, 'location');
 
         let id = res.headers.location;
         assert.isNotNull(id);
