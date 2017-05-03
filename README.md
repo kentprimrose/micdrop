@@ -1,2 +1,2 @@
 # micdrop
-Opinionated REST micro-service framework leveraging Express.
+An opinionated REST micro-service framework leveraging Express.
