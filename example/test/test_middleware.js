@@ -34,13 +34,7 @@ describe('HTTP service middleware', () => {
       .end( (err, res) => {
         assert.isNull(err);
         assert.equal(res.statusCode, 200);
-
-        assert.equal(res.headers['access-control-allow-methods'],
-                     'PUT, POST, GET, OPTIONS');
-        assert.equal(res.headers['access-control-allow-origin'],
-                     '*');
-        assert.equal(res.headers['access-control-allow-headers'],
-                     'Content-Type');
+        assert.propertyVal(res.headers, 'test', 'OK');
 
         deleteEntry(res.headers.location);
         done();
