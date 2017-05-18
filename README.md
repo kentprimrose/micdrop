@@ -1,2 +1,2 @@
 # micdrop
-MicroService baseline using Express
+An opinionated REST micro-service framework leveraging Express.
