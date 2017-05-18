@@ -1,6 +1,6 @@
 const micdrop = require('..');
 
-module.exports = micdrop.init({
+module.exports = micdrop({
   PORT: 3500,
   middleware: [
     require('./middleware/cors_middleware'),

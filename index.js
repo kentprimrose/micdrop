@@ -9,34 +9,32 @@ let setDefault = (obj, key, def) => {
   }
 };
 
-module.exports = {
-  init: (config={}) => {
+module.exports = (config={}) => {
 
-    // Configuration
-    setDefault(config, 'PORT', 3000);
+  // Configuration
+  setDefault(config, 'PORT', 3000);
 
-    const app = express();
-    app.use(bodyParser.json());
+  const app = express();
+  app.use(bodyParser.json());
 
-    if (config.hasOwnProperty('middleware')) {
-      for (let middleware of config.middleware) {
-        app.use(middleware);
-      }
+  if (config.hasOwnProperty('middleware')) {
+    for (let middleware of config.middleware) {
+      app.use(middleware);
     }
-
-    if (config.hasOwnProperty('routes')) {
-      for (let route of config.routes) {
-        router(app, route);
-      }
-    }
-
-    // Allows external control and 'watch' testing.
-    if (!module.parent.parent) {
-      app.listen(config.PORT, () => {
-        console.log('Listening on port %s', config.PORT);
-      });
-    }
-
-    return app;
   }
+
+  if (config.hasOwnProperty('routes')) {
+    for (let route of config.routes) {
+      router(app, route);
+    }
+  }
+
+  // Allows external control and 'watch' testing.
+  if (!module.parent.parent) {
+    app.listen(config.PORT, () => {
+      console.log('Listening on port %s', config.PORT);
+    });
+  }
+
+  return app;
 };
