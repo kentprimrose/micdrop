@@ -11,6 +11,7 @@
   "author": "Kent Primrose",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.3",
     "micdrop": "^0.1.0"
   },
   "devDependencies": {
