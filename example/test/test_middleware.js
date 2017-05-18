@@ -27,7 +27,7 @@ let deleteEntry = (id) => {
 describe('HTTP service middleware', () => {
   let ids;
 
-  it('should set expected headers', (done) => {
+  it('should set expected CORS headers', (done) => {
     chai.request(server)
       .post(URI)
       .send(BASE)
@@ -35,12 +35,22 @@ describe('HTTP service middleware', () => {
         assert.isNull(err);
         assert.equal(res.statusCode, 200);
 
-        assert.equal(res.headers['access-control-allow-methods'],
-                     'PUT, POST, GET, OPTIONS');
-        assert.equal(res.headers['access-control-allow-origin'],
-                     '*');
-        assert.equal(res.headers['access-control-allow-headers'],
-                     'Content-Type');
+        assert.equal(res.headers['access-control-allow-origin'], '*');
+
+        deleteEntry(res.headers.location);
+        done();
+      });
+  });
+
+  it('should set expected sample headers', (done) => {
+    chai.request(server)
+      .post(URI)
+      .send(BASE)
+      .end( (err, res) => {
+        assert.isNull(err);
+        assert.equal(res.statusCode, 200);
+
+        assert.equal(res.headers['sample-header'], 'some value');
 
         deleteEntry(res.headers.location);
         done();
