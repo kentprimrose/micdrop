@@ -9,7 +9,7 @@ const assert = chai.assert;
 
 chai.use(chaiHttp);
 
-const URI = '/task/';
+const URI = '/person/123/task/';
 const BASE = {
   PersonId: '1234',
   Description: 'This is a cool task',
@@ -39,8 +39,7 @@ describe('HTTP service', () => {
         let id = res.headers.location;
         assert.isNotNull(id);
 
-        deleteEntry(id);
-        done();
+        done(deleteEntry(id));
       });
   });
 
@@ -73,8 +72,7 @@ describe('HTTP service', () => {
             assert.isNull(err);
             assert.deepEqual(res.body, BASE);
 
-            deleteEntry(id);
-            done();
+            done(deleteEntry(id));
           });
       });
   });
@@ -96,8 +94,7 @@ describe('HTTP service', () => {
             assert.isNull(err);
             assert.deepEqual(res.body, BASE);
 
-            deleteEntry(id);
-            done();
+            done(deleteEntry(id));
           });
       });
   });
@@ -128,8 +125,7 @@ describe('HTTP service', () => {
               .end( (err, res) => {
                 assert.equal(res.statusCode, 405);
                 
-                deleteEntry(id);
-                done();
+                done(deleteEntry(id));
               });
           });
       });

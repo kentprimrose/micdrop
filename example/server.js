@@ -10,7 +10,7 @@ module.exports = micdrop({
     path: 'person',
     handler: require('./handlers/person_handler')
   },{
-    path: 'task',
+    path: 'person/:personId/task',
     handler: require('./handlers/task_handler')
   }]
 });
