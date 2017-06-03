@@ -1,15 +1,15 @@
 const storage = require('memrest')();
 
 module.exports = {
-  getOne: (id) => {
-    return storage.get(id);
+  getOne: (id, next) => {
+    next(storage.get(id));
   },
 
-  post: (item) => {
-    return storage.post(item);
+  post: (item, next) => {
+    next(storage.post(item));
   },
 
-  delete: (id) => {
-    return storage.delete(id);
+  delete: (id, next) => {
+    next(storage.delete(id));
   }
 };
