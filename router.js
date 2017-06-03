@@ -25,7 +25,7 @@ module.exports = (app, route) => {
     try {
       if (!route.handler.get) return res.sendStatus(405);
 
-      return route.handler.get(req, (result) => {
+      return route.handler.get((result) => {
         return res.status(200).send(result);
       }, req);
     }
