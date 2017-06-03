@@ -77,7 +77,7 @@ describe('HTTP service', () => {
       });
   });
 
-  it('should return an existing item', (done) => {
+  it('should process HEAD correctly', (done) => {
     chai.request(server)
       .post(URI)
       .send(BASE)
@@ -94,8 +94,21 @@ describe('HTTP service', () => {
             assert.isNull(err);
             assert.deepEqual(res.body, BASE);
 
-            deleteEntry(id);
-            done();
+            let getHeaders = res.headers;
+
+            chai.request(server)
+              .head(URI + id)
+              .end( (err, res) => {
+                assert.isNull(err);
+                assert(!res.body || !Object.keys(res.body).len);
+
+                let headHeaders = res.headers;
+
+                assert.deepEqual(getHeaders, headHeaders);
+
+                deleteEntry(id);
+                done();
+              });
           });
       });
   });
