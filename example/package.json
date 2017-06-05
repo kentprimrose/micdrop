@@ -4,7 +4,8 @@
   "description": "Example of using micdrop.",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --reporter min --recursive --watch",
+    "test": "mocha --reporter spec",
+    "test:watch": "mocha --reporter min --recursive --watch",
     "test:debug": "npm test -- debug",
     "test:cover": "istanbul cover node_modules/.bin/_mocha -- -u exports -R spec test/**/* --report html"
   },

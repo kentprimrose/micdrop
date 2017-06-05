@@ -54,6 +54,17 @@ describe('HTTP service', () => {
       });
   });
 
+  it('should return multiple items for GET', (done) => {
+    chai.request(server)
+      .get(URI)
+      .end( (err, res) => {
+        assert.isNull(err);
+        assert.equal(res.body.length, 3);
+
+        done();
+      });
+  });
+
   it('should return an existing item', (done) => {
     chai.request(server)
       .post(URI)
